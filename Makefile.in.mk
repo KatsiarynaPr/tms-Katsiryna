@@ -37,8 +37,8 @@ PIPENV_INSTALL := echo Cannot create venv under venv
 else
 
 IN_VENV := False
-RUN := pipenv run
-PIPENV_INSTALL := pipenv install
+RUN := python3 -m pipenv run
+PIPENV_INSTALL := python3 -m pipenv install
 
 endif
 
