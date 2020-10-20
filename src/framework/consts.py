@@ -1,6 +1,5 @@
 from pathlib import Path
 
-
 SERVER_RUNNING_BANNER = """
 +----------------------------------------+
 |             SERVER WORKS!              |

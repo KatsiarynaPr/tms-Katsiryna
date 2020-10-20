@@ -2,8 +2,8 @@ from framework.consts import DIR_STATIC
 
 
 def application(environ, start_response):
-    url=environ['PATH_INFO']
-    if url=="/xxx/":
+    url = environ["PATH_INFO"]
+    if url == "/xxx/":
         status = "200 OK"
         headers = {
             "Content-type": "text/css",
@@ -24,12 +24,13 @@ def application(environ, start_response):
 
         yield payload
 
+
 def read_from_index_html():
     path = DIR_STATIC / "index.html"
 
     with path.open("r") as fp:
         payload = fp.read()
-    
+
     payload = payload.encode()
     return payload
 
