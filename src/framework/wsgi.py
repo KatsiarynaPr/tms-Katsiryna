@@ -1,3 +1,5 @@
+from mimetypes import guess_type
+
 from framework.consts import DIR_STATIC
 
 
@@ -6,17 +8,17 @@ def application(environ, start_response):
     if url == "/xxx/":
         status = "200 OK"
         headers = {
-            "Content-type": "text/css",
+            "Content-type": guess_type("style.css")[0],
         }
         payload = read_from_style_css()
         start_response(status, list(headers.items()))
 
         yield payload
 
-    elif url=="/logo.png/":
+    elif url == "/logo.png/":
         status = "200 OK"
         headers = {
-            "Content-type": "image/jpeg",
+            "Content-type": guess_type("logo.jpg")[0],
         }
         payload = read_from_logo_png()
         start_response(status, list(headers.items()))
@@ -26,7 +28,7 @@ def application(environ, start_response):
     else:
         status = "200 OK"
         headers = {
-            "Content-type": "text/html",
+            "Content-type": guess_type("index.html")[0],
         }
         payload = read_from_index_html()
 
@@ -53,6 +55,7 @@ def read_from_style_css():
 
     payload = payload.encode()
     return payload
+
 
 def read_from_logo_png():
     path = DIR_STATIC / "logo.jpg"
