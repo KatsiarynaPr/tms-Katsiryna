@@ -1,3 +1,4 @@
+import random
 from mimetypes import guess_type
 
 from framework.consts import DIR_STATIC
@@ -5,62 +6,42 @@ from framework.consts import DIR_STATIC
 
 def application(environ, start_response):
     url = environ["PATH_INFO"]
-    if url == "/xxx/":
+
+    file_names = {"/xxx/": "styles.css", "/logo.png/": "logo.jpg", "/": "index.html"}
+    file_name = file_names.get(url)
+
+    if file_name is not None:
         status = "200 OK"
         headers = {
-            "Content-type": guess_type("style.css")[0],
+            "Content-type": guess_type(file_name)[0],
         }
-        payload = read_from_style_css()
-        start_response(status, list(headers.items()))
-
-        yield payload
-
-    elif url == "/logo.png/":
-        status = "200 OK"
-        headers = {
-            "Content-type": guess_type("logo.jpg")[0],
-        }
-        payload = read_from_logo_png()
-        start_response(status, list(headers.items()))
-
-        yield payload
+        payload = read_static(file_name)
 
     else:
-        status = "200 OK"
+        status = "404 Not Found"
         headers = {
-            "Content-type": guess_type("index.html")[0],
+            "Content-type": "text/html",
         }
-        payload = read_from_index_html()
+        payload = generate_404(environ)
 
-        start_response(status, list(headers.items()))
+    start_response(status, list(headers.items()))
 
-        yield payload
-
-
-def read_from_index_html():
-    path = DIR_STATIC / "index.html"
-
-    with path.open("r") as fp:
-        payload = fp.read()
-
-    payload = payload.encode()
-    return payload
+    yield payload
 
 
-def read_from_style_css():
-    path = DIR_STATIC / "styles.css"
-
-    with path.open("r") as fp:
-        payload = fp.read()
-
-    payload = payload.encode()
-    return payload
-
-
-def read_from_logo_png():
-    path = DIR_STATIC / "logo.jpg"
+def read_static(file_name: str) -> bytes:
+    path = DIR_STATIC / file_name
 
     with path.open("rb") as fp:
         payload = fp.read()
 
     return payload
+
+
+def generate_404(environ) -> bytes:
+    url = environ["PATH_INFO"]
+    pin = random.randint(1, 10000)
+    advice = "https://fucking-great-advice.ru/advice/" + str(pin)
+    msg = f'Your path: {url} not found. Read the advice ---> <a href="{advice}">ADVICE</a> !!!'
+
+    return msg.encode()
