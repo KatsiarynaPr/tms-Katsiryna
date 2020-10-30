@@ -1,47 +1,35 @@
-import random
-from mimetypes import guess_type
+from framework.types import RequestT
+from handlers.index import handler_index
+from handlers.logo import handler_logo
+from handlers.not_found import handler_404
+from handlers.styles import handler_styles
 
-from framework.consts import DIR_STATIC
+handlers = {
+    "/": handler_index,
+    "/logo.png/": handler_logo,
+    "/xxx/": handler_styles,
+}
 
 
-def application(environ, start_response):
-    url = environ["PATH_INFO"]
+def application(environ: dict, start_response):
 
-    handlers = {"/": handler_index}
+    path = environ["PATH_INFO"]
 
-    handler = handlers.get(url, handler_404)
+    handler = handlers.get(path, handler_404)
 
-    status = "200 OK"
-    headers = {
-        "Content-type": "text/html",
+    request_headers = {
+        key[5:]: environ[key]
+        for key in filter(lambda i: i.startswith("HTTP_"), environ)
     }
-    payload = handler(environ)
 
-    start_response(status, list(headers.items()))
+    request = RequestT(
+        method=environ["PATH_INFO"],
+        path=path,
+        headers=request_headers,
+    )
 
-    yield payload
+    response = handler(request)
 
+    start_response(response.status, list(response.headers.items()))
 
-def read_static(file_name: str) -> bytes:
-    path = DIR_STATIC / file_name
-
-    with path.open("rb") as fp:
-        payload = fp.read()
-
-    return payload
-
-
-def handler_index(_environ) -> bytes:
-    basde_html = read_static("_base.html").decode()
-    index_html = read_static("index.html").decode()
-    text = basde_html.format(xxx=index_html)
-    return text.encode()
-
-
-def handler_404(environ) -> bytes:
-    url = environ["PATH_INFO"]
-    pin = random.randint(1, 10000)
-    advice = "https://fucking-great-advice.ru/advice/" + str(pin)
-    msg = f'Your path: {url} not found. Read the advice ---> <a href="{advice}">ADVICE</a> !!!'
-
-    return msg.encode()
+    yield response.payload
