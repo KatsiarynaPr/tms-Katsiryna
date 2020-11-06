@@ -1,11 +1,13 @@
 from framework.types import RequestT
 from framework.types import ResponseT
 from framework.utils import read_static
+from framework.utils import build_status
 
 
 def handler_styles(_request: RequestT) -> ResponseT:
     styles = read_static("styles.css")
-    status = "200 OK"
+
+    status = build_status(200)
     headers = {
         "Content-type": "text/css",
     }
