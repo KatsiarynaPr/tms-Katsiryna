@@ -1,7 +1,7 @@
 from framework.types import RequestT
 from framework.types import ResponseT
-from framework.utils import read_static
 from framework.utils import build_status
+from framework.utils import read_static
 
 
 def handler_styles(_request: RequestT) -> ResponseT:

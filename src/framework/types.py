@@ -18,10 +18,10 @@ class RequestT:
     query: Optional[dict] = None
     kwargs: Optional[dict] = None
 
+
 HandlerT = Callable[[RequestT], ResponseT]
 
 
 class StaticT(NamedTuple):
     content: bytes
     content_type: str
-

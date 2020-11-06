@@ -1,18 +1,18 @@
-from framework.consts import DIR_STATIC
-from framework.types import StaticT
 import http
-from pathlib import Path
-from framework.errors import NotFound
 import mimetypes
+from pathlib import Path
 
+from framework.consts import DIR_STATIC
+from framework.errors import NotFound
+from framework.types import StaticT
 
-#def read_static(file_name: str) -> bytes:
-    #path = DIR_STATIC / file_name
+# def read_static(file_name: str) -> bytes:
+# path = DIR_STATIC / file_name
 
-    #with path.open("rb") as fp:
-        #payload = fp.read()
+# with path.open("rb") as fp:
+# payload = fp.read()
 
-    #return payload
+# return payload
 
 # def read_static(file_name: str) -> StaticT:
 #     if file_name.startswith("/"):
@@ -30,6 +30,7 @@ import mimetypes
 #
 #     return StaticT(content=content, content_type=content_type)
 
+
 def read_static(file_name: str) -> bytes:
     path = DIR_STATIC / file_name
 
@@ -37,7 +38,6 @@ def read_static(file_name: str) -> bytes:
         payload = fp.read()
 
     return payload
-
 
 
 def build_status(code: int) -> str:
