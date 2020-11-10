@@ -14,6 +14,10 @@ def handler_404(request: RequestT) -> ResponseT:
         headers_text = headers_text + item + "<br>"
     msg = f"""Your path: {url} not found. Read the advice ---> <a href="{advice}">ADVICE</a> !!!
     
+
+
+
+
 {headers_text}
     """
     payload = msg.encode()

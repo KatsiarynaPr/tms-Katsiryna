@@ -1,45 +1,36 @@
-from urllib.parse import parse_qs
-
 from framework.types import RequestT
-from handlers.error import make_error
-from handlers.hello import handler_hello
-from handlers.index import handler_index
-from handlers.logo import handler_logo
-from handlers.not_found import handler_404
-from handlers.server_error import handler_500
-from handlers.styles import handler_styles
-
-handlers = {
-    "/": handler_index,
-    "/logo.png/": handler_logo,
-    "/xxx/": handler_styles,
-    "/e/": make_error,
-    "/h/": handler_hello,
-}
-
+from framework.errors import NotFound
+from handlers import get_handler_and_kwargs
+from framework.utils import get_request_headers
+from handlers import special
+from framework.utils import get_query
+from framework.utils import get_body
+from framework.utils import get_form_data
 
 def application(environ: dict, start_response):
+    path = environ["PATH_INFO"]
+    method = environ["REQUEST_METHOD"]
+    handler, kwargs = get_handler_and_kwargs(path)
+    request_headers = get_request_headers(environ)
+    query = get_query(environ)
+    body = get_body(environ)
+    form_data = get_form_data(body)
 
+    request = RequestT(
+        body=body,
+        form_data=form_data,
+        headers=request_headers,
+        kwargs=kwargs,
+        method=method,
+        path=path,
+        query=query,
+    )
     try:
-        path = environ["PATH_INFO"]
-
-        handler = handlers.get(path, handler_404)
-
-        request_headers = {
-            key[5:]: environ[key]
-            for key in filter(lambda i: i.startswith("HTTP_"), environ)
-        }
-
-        request = RequestT(
-            method=environ["PATH_INFO"],
-            path=path,
-            headers=request_headers,
-            query=parse_qs(environ.get("QUERY_STRING") or ""),
-        )
-
         response = handler(request)
+    except NotFound:
+        response = special.handler_404(request)
     except Exception:
-        response = handler_500()
+        response = special.handler_500(request)
 
     start_response(response.status, list(response.headers.items()))
 
