@@ -28,4 +28,3 @@ HandlerT = Callable[[RequestT], ResponseT]
 class StaticT(NamedTuple):
     content: bytes
     content_type: str
-

@@ -1,10 +1,9 @@
-import traceback
 import sys
+import traceback
+
 from framework.types import RequestT
 from framework.types import ResponseT
 from framework.utils import read_static
-
-
 
 # def handler_500(_request: RequestT = None) -> ResponseT:
 #     document = traceback.format_exc()
@@ -17,6 +16,7 @@ from framework.utils import read_static
 #     }
 #
 #     return ResponseT(status, headers, payload)
+
 
 def handler_500(_request: RequestT = None) -> ResponseT:
     traceback.print_exc()

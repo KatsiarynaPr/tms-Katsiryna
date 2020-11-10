@@ -3,7 +3,6 @@ from typing import Dict
 from typing import Tuple
 
 from framework.types import HandlerT
-
 from handlers import special
 from handlers.error import make_error
 from handlers.hello import handler_hello
