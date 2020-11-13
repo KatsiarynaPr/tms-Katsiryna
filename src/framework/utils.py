@@ -20,7 +20,6 @@ from framework.types import RequestT
 from framework.types import StaticT
 
 
-
 def http_first(value: Tuple[str, Any]) -> tuple:
     if value[0].startswith("HTTP"):
         return 0, value
