@@ -2,6 +2,7 @@ import random
 
 from framework.types import RequestT
 from framework.types import ResponseT
+from framework.utils import build_status
 
 
 def handler_404(request: RequestT) -> ResponseT:
@@ -13,17 +14,24 @@ def handler_404(request: RequestT) -> ResponseT:
     for item in headers_string:
         headers_text = headers_text + item + "<br>"
     msg = f"""Your path: {url} not found. Read the advice ---> <a href="{advice}">ADVICE</a> !!!
-    
-
-
-
-
-{headers_text}
+   {headers_text}
     """
     payload = msg.encode()
-    status = "404 Not Found"
+    status = build_status(404)
     headers = {
         "Content-type": "text/html",
     }
 
     return ResponseT(status, headers, payload)
+
+
+def handler_405(request: RequestT) -> ResponseT:
+    status = build_status(405)
+    payload = f"Resource {request.path} does not support {request.method} requests."
+    headers = {"Content-type": "text/plain"}
+
+    return ResponseT(
+        status=status,
+        headers=headers,
+        payload=payload.encode(),
+    )
