@@ -6,6 +6,7 @@ from framework.types import HandlerT
 from handlers import special
 from handlers.error import make_error
 from handlers.hello import handler_hello
+from handlers.hello import handler_hello_delete
 from handlers.index import handler_index
 
 urlpatterns: Dict[re.compile, HandlerT] = {
@@ -14,6 +15,7 @@ urlpatterns: Dict[re.compile, HandlerT] = {
         "^/$": handler_index,
         "^/e/$": make_error,
         "^/h/$": handler_hello,
+        "^/hh/clear/$": handler_hello_delete,
         "^/s/(?P<file_name>.+)$": special.handler_static,
     }.items()
 }

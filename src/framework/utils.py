@@ -4,6 +4,7 @@ import json
 import mimetypes
 import re
 from html import escape
+from http.cookies import SimpleCookie
 from pathlib import Path
 from typing import Any
 from typing import Callable
@@ -12,9 +13,11 @@ from typing import Optional
 from typing import Tuple
 from urllib.parse import parse_qs
 
+from framework import settings
 from framework.consts import DIR_STATIC
 from framework.consts import METHODS_WITH_REQUEST_BODY
 from framework.consts import USER_COOKIE
+from framework.consts import USER_TTL
 from framework.errors import NotFound
 from framework.types import RequestT
 from framework.types import StaticT
@@ -124,6 +127,29 @@ def get_request_path(environ: dict) -> str:
 
 
 def get_user_id(headers: Dict) -> Optional[str]:
-    cookies = parse_qs(headers.get("COOKIE", ""))
-    user_id = cookies.get(USER_COOKIE, [None])[0]
+    header = headers.get("COOKIE", "")
+    jar = SimpleCookie(header)
+
+    if USER_COOKIE not in jar:
+        return None
+
+    user_id = jar[USER_COOKIE].value
+
     return user_id
+
+
+def build_user_cookie_header(user_id: str, clear=False) -> str:
+    jar = SimpleCookie()
+
+    jar[USER_COOKIE] = user_id
+    cookie = jar[USER_COOKIE]
+    cookie["Domain"] = settings.HOST
+    cookie["Path"] = "/"
+    cookie["HttpOnly"] = True
+
+    max_age = 0 if clear else USER_TTL.total_seconds()
+    cookie["Max-Age"] = max_age
+
+    header = jar.output(header="").strip()
+
+    return header
