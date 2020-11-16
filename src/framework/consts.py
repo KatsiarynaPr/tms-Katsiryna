@@ -1,7 +1,7 @@
 from datetime import timedelta
 from pathlib import Path
 
-from consts import DIR_REPO
+from scripts.consts import DIR_REPO
 
 SERVER_RUNNING_BANNER = """
 +----------------------------------------+
