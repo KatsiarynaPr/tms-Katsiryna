@@ -100,19 +100,19 @@ def test_build_form_data():
 def test_get_request_body():
     environ = {}
     body = utils.get_request_body(environ)
-    assert body == b""
+    assert body is None
 
     environ = {"wsgi.input": 1}
     body = utils.get_request_body(environ)
-    assert body == b""
+    assert body is None
 
     environ = {"wsgi.input": 1, "REQUEST_METHOD": "POST"}
     body = utils.get_request_body(environ)
-    assert body == b""
+    assert body is None
 
     environ = {"wsgi.input": 1, "CONTENT_LENGTH": "123"}
     body = utils.get_request_body(environ)
-    assert body == b""
+    assert body is None
 
     src = io.BytesIO()
     content = b"xxx"
