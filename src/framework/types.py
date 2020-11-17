@@ -1,6 +1,7 @@
 import dataclasses
 import os
 from datetime import datetime
+from http.cookies import SimpleCookie
 from typing import Callable
 from typing import NamedTuple
 from typing import Optional
@@ -26,6 +27,7 @@ class RequestT:
     query: Optional[dict] = None
     form_data: Optional[dict] = None
     user: Optional["UserT"] = None
+    cookies: Optional[SimpleCookie] = None
 
 
 HandlerT = Callable[[RequestT], ResponseT]

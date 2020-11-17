@@ -14,7 +14,7 @@ urlpatterns: Dict[re.compile, HandlerT] = {
     for _path_pattern, _handler in {
         "^/$": handler_index,
         "^/e/$": make_error,
-        "^/h/$": handler_hello,
+        "^/h/((?P<action>.+)/)?$": handler_hello,
         "^/hh/clear/$": handler_hello_delete,
         "^/s/(?P<file_name>.+)$": special.handler_static,
     }.items()
