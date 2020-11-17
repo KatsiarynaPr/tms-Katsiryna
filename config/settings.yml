@@ -34,4 +34,4 @@ ci:
 
 
 heroku:
-  HOST: "tms-z37.herokuapp.com"
+  HOST: "tmsprojctskatsiaryna.herokuapp.com"
