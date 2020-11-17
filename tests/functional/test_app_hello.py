@@ -40,6 +40,6 @@ def test(browser, request):
     page.submit_button.click()
     validate_redirect(page, url)
     assert page.greeting.text == "Hello Alex"
-    assert page.address.text == "You are at localhost"
+    assert page.address.text == "You are in localhost"
     assert page.name_input.get_attribute("value") == "Alex"
     assert page.address_input.get_attribute("value") == "localhost"
