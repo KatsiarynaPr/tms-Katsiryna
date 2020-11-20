@@ -15,10 +15,10 @@ from urllib.parse import parse_qs
 
 from framework import settings
 from framework.consts import DIR_STATIC
+from framework.consts import map
 from framework.consts import METHODS_WITH_REQUEST_BODY
 from framework.consts import USER_COOKIE
 from framework.consts import USER_TTL
-from framework.consts import map
 from framework.db import find_user
 from framework.errors import NotFound
 from framework.types import RequestT
