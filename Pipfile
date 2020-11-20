@@ -13,7 +13,6 @@ pytest = "*"
 pytest-mock = "*"
 pytest-selenium = "*"
 delorean = "*"
-
 [packages]
 dynaconf = { extras = ["yaml"], version = "*" }
 gunicorn = "*"
