@@ -28,3 +28,8 @@ USER_COOKIE = "z37user"
 USER_TTL = timedelta(minutes=5)
 
 DATE_TIME_FMT = "%Y-%m-%d %H:%M:%S"
+
+
+map = {
+    "ttf": "font/ttf",
+}

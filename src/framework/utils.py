@@ -15,6 +15,7 @@ from urllib.parse import parse_qs
 
 from framework import settings
 from framework.consts import DIR_STATIC
+from framework.consts import map
 from framework.consts import METHODS_WITH_REQUEST_BODY
 from framework.consts import USER_COOKIE
 from framework.consts import USER_TTL
@@ -92,9 +93,19 @@ def read_static(file_name: str) -> StaticT:
     with file_obj.open("rb") as fp:
         content = fp.read()
 
-    content_type = mimetypes.guess_type(file_name)[0]
+    content_type = guess_typ(file_name)
 
     return StaticT(content=content, content_type=content_type)
+
+
+def guess_typ(file_name):
+    ct = mimetypes.guess_type(file_name)[0]
+    if not ct:
+        ext = file_name.split(".")[-1]
+        ext = ext.lower()
+        ct = map.get(ext)
+
+    return ct
 
 
 def get_request_headers(environ: dict) -> dict:
