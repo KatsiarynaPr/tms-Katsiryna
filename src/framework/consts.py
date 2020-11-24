@@ -1,7 +1,6 @@
 from datetime import timedelta
 from pathlib import Path
 
-
 SERVER_RUNNING_BANNER = """
 +----------------------------------------+
 |             SERVER WORKS!              |

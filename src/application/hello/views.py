@@ -1,5 +1,7 @@
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpRequest
+from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.shortcuts import render
 
 
 def hello(request: HttpRequest) -> HttpResponse:
@@ -14,6 +16,7 @@ def hello(request: HttpRequest) -> HttpResponse:
     result = render(request, "hello/hello.html", context=context)
 
     return HttpResponse(result)
+
 
 def view_hello_greet(request: HttpRequest) -> HttpResponse:
     name = request.POST.get("name")
