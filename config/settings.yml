@@ -37,7 +37,6 @@ ci:
   WEB_CONCURRENCY: 2
 
 
-
 heroku:
   HOST: "tmsprojctskatsiaryna.herokuapp.com"
   MODE_DEBUG: false
