@@ -13,3 +13,4 @@ tests/**/*.html
 tests/**/*.png
 venv/
 db/*.json
+.static/
