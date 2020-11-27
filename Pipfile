@@ -17,7 +17,7 @@ delorean = "*"
 [packages]
 dynaconf = { extras = ["yaml"], version = "*" }
 gunicorn = "*"
-#psycopg2-binary = "*"
+psycopg2-binary = "*"
 django = "*"
 sentry-sdk = "*"
 whitenoise = "*"
