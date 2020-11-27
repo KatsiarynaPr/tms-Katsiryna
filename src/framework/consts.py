@@ -1,8 +1,6 @@
 from datetime import timedelta
 from pathlib import Path
 
-from scripts.consts import DIR_REPO
-
 SERVER_RUNNING_BANNER = """
 +----------------------------------------+
 |             SERVER WORKS!              |
@@ -13,7 +11,15 @@ Visit http://{host}:{port}
 ..........................................
 """
 
-DIR_STATIC = (Path(__file__).parent.parent / "static").resolve()
+_this_file = Path(__file__).resolve()
+
+DIR_FRAMEWORK = _this_file.parent.resolve()
+
+DIR_SRC = DIR_FRAMEWORK.parent.resolve()
+
+DIR_REPO = DIR_SRC.parent.resolve()
+
+DIR_STATIC = (DIR_SRC / "static").resolve()
 
 METHODS_WITH_REQUEST_BODY = {
     "POST",
