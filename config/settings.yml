@@ -43,3 +43,4 @@ ci:
 heroku:
   HOST: "tmsprojctskatsiaryna.herokuapp.com"
   MODE_DEBUG: false
+  VENV_SYNTHETIC: true
