@@ -1,6 +1,7 @@
 from django.http import HttpRequest
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
+from django.shortcuts import render
 
 from application.blog.models import Post
 
@@ -13,6 +14,7 @@ def all_posts_view(request) -> HttpResponse:
 
     return HttpResponse(result)
 
+
 def new_post_view(request: HttpRequest):
     title = request.POST["title"]
     content = request.POST["content"]
@@ -23,7 +25,7 @@ def new_post_view(request: HttpRequest):
     post.save()
     return redirect("/b/")
 
+
 def reset_post_view(request: HttpRequest):
     Post.objects.all().delete()
     return redirect("/b/")
-
