@@ -15,9 +15,10 @@
     <button type="submit">Create Post</button>
   </form>
 <p>
-<form action="/b/reset/" method="post">
+<form action="/b/wipe/" method="post">
     {% csrf_token %}
-  <button id="reset_id" type="submit">Reset Post</button>
+  <button id="wipe_id" type="submit">Reset Post</button>
+</form>
 </p>
     {% for post in object_list %}
 <article>
@@ -25,7 +26,14 @@
   <p>{{ post.content }}</p>
   <p>{{ post.created_at }}</p>
   <p>Likes: {{ post.nr_likes }}</p>
-  </article>
+
+  <p>
+  <form action="post/{{ post.pk }}/" method="get">
+    {% csrf_token %}
+  <button id="post_id" type="submit">Read Post</button>
+  </p>
+  </form>
+</article>
 {% endfor %}
 
 {% endblock %}

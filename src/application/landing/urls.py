@@ -1,7 +1,7 @@
 from django.urls import path
 
-from application.landing.views import index
+from application.landing.views import IndexViex
 
 urlpatterns = [
-    path("", index),
+    path("", IndexViex.as_view()),
 ]
