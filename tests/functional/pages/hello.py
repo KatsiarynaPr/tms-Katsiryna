@@ -9,4 +9,4 @@ class HelloPage(PageObject):
     address = PageElement(By.CSS_SELECTOR, "#address_display_id")
     name_input = PageElement(By.CSS_SELECTOR, "#id_name")
     address_input = PageElement(By.CSS_SELECTOR, "#id_address")
-    submit_button = PageElement(By.CSS_SELECTOR, "#id_submit")
+    submit_button = PageElement(By.CSS_SELECTOR, "#submit_id")
