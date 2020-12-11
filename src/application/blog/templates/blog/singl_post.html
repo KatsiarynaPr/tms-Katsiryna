@@ -11,11 +11,12 @@
 </article>
 </form>
 <p>
+{% if user.is_superuser or object.author == user %}
 <form action="delete/" method="post">
     {% csrf_token %}
   <button id="wipe_id" type="submit">Reset Singl Post</button>
 </form>
-
+{% endif %}
 </form>
 <p>
 <form action="update/" method="get">

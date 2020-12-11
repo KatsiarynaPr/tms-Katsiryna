@@ -31,6 +31,12 @@ class NewPostView(CreateView):
     fields = ["title", "content"]
     success_url = "/b/"
 
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.author = self.request.user
+
+        return super().form_valid(form)
+
 
 class WipeAllPostsView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
