@@ -3,20 +3,9 @@
 {{ob}}
 <h1>UPDATE IF YOU WONT</h1>
 
-<form method="post" action="/b/new/">
-    {% csrf_token %}
-
-    <div class="post-form-fields">
-    {{ form.title }}
-    {{ form.content }}
-</div>
-
-<article>
-  <p>{{ post.created_at }}</p>
-  <p>Likes: {{ post.nr_likes }}</p>
-</article>
-
-    <button type="submit">Update Post</button>
-  </form>
+<form action="" method="post">{% csrf_token %}
+      {{ form.as_p }}
+    <input type="submit" value="Update" />
+</form>
 
 {% endblock %}

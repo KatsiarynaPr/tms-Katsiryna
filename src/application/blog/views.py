@@ -58,10 +58,9 @@ class UpdatePostView(UpdateView):
     model = Post
     fields = ["title", "content"]
 
-    def get_absolute_url(self):
-        kwargs = {"pk": self.pk}
-        url = reverse_lazy("post/<int:pk>/", kwargs=kwargs)
-        return url
+    def form_valid(self, form):
+        self.object.edited = True
+        return super().form_valid(form)
 
     # def update_url(self):
     #     success_url = reverse_lazy("blog:post", kwargs={"pk": self.object.pk})

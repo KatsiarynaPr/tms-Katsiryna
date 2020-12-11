@@ -1,6 +1,6 @@
 import delorean
 from django.db import models
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 
 def _now():
@@ -17,6 +17,4 @@ class Post(models.Model):
         ordering = ["-created_at"]
 
     def get_absolute_url(self):
-        kwargs = {"pk": self.pk}
-        url = reverse_lazy("blog:post", kwargs=kwargs)
-        return url
+        return reverse('post', args=[str(self.id)])
