@@ -57,7 +57,12 @@ class UpdatePostView(UpdateView):
     template_name = "blog/update_post.html"
     model = Post
     fields = ["title", "content"]
-    success_url = "/b/"
+
+    def get_absolute_url(self):
+        kwargs = {"pk": self.pk}
+        url = reverse_lazy("post/<int:pk>/", kwargs=kwargs)
+        return url
+
     # def update_url(self):
     #     success_url = reverse_lazy("blog:post", kwargs={"pk": self.object.pk})
     #     return success_url

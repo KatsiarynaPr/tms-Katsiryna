@@ -16,4 +16,11 @@
   <button id="wipe_id" type="submit">Reset Singl Post</button>
 </form>
 
+</form>
+<p>
+<form action="update/" method="get">
+    {% csrf_token %}
+  <button id="update_id" type="submit">Update Post</button>
+</form>
+
 {% endblock %}
