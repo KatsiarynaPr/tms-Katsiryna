@@ -19,8 +19,9 @@ from django.urls import path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("application.landing.urls")),
-    path("h/", include("application.hello.urls")),
-    path("b/", include("application.blog.urls")),
-    path("e/", lambda _r: 1 / 0),
+    path("", include("applications.landing.urls")),
+    path("h/", include("applications.hello.urls")),
+    path("b/", include("applications.blog.urls")),
+    path("e/", lambda _r: 1 / 0, name="error"),
+    path("o/", include("applications.onboarding.urls")),
 ]

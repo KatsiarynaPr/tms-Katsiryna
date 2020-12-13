@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class BlogConfig(AppConfig):
     label = "blog"
-    name = f"application.{label}"
+    name = f"applications.{label}"

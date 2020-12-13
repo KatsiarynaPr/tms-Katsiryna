@@ -33,6 +33,7 @@
   <p>{{ post.content }}</p>
   <p>{{ post.created_at }}</p>
   <p>Likes: {{ post.nr_likes }}</p>
+    <p> {{ post.author.username }} </p>
     <p> {{ post.author.email }} </p>
   <p>
   <form action="post/{{ post.pk }}/" method="get">

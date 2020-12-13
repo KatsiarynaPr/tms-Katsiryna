@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class LandingConfig(AppConfig):
     label = "landing"
-    name = f"application.{label}"
+    name = f"applications.{label}"

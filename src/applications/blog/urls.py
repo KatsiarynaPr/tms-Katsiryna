@@ -1,6 +1,9 @@
 from django.urls import path
 
-from application.blog import views
+from applications.blog import views
+from applications.blog.apps import BlogConfig
+
+app_name = BlogConfig.label
 
 urlpatterns = [
     path("", views.AllPostsView.as_view(), name="all"),

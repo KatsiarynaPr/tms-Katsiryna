@@ -13,7 +13,7 @@ from django.views.generic import ListView
 from django.views.generic import RedirectView
 from django.views.generic import UpdateView
 
-from application.blog.models import Post
+from applications.blog.models import Post
 
 
 class AllPostsView(ListView):

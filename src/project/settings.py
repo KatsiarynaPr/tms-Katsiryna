@@ -16,6 +16,8 @@ from pathlib import Path
 import dj_database_url
 from dynaconf import settings as dyn
 
+from django.urls import reverse_lazy
+
 DEBUG = dyn.MODE_DEBUG
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -48,9 +50,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # ------------------------------
-    "application.landing.apps.LandingConfig",
-    "application.hello.apps.HelloConfig",
-    "application.blog.apps.BlogConfig",
+    "applications.landing.apps.LandingConfig",
+    "applications.hello.apps.HelloConfig",
+    "applications.blog.apps.BlogConfig",
+    "applications.onboarding.apps.OnboardingConfig",
 ]
 
 MIDDLEWARE = [
@@ -111,6 +114,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+if DEBUG:
+    AUTH_PASSWORD_VALIDATORS = []
+
+LOGIN_URL = reverse_lazy("onboarding:sign-in")
+LOGIN_REDIRECT_URL = reverse_lazy("landing:index")
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

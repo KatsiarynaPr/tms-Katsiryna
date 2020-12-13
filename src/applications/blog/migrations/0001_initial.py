@@ -5,7 +5,7 @@ from django.conf import settings
 from django.db import migrations
 from django.db import models
 
-import application.blog.models
+import applications.blog.models
 
 
 class Migration(migrations.Migration):
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ("nr_likes", models.IntegerField(default=0)),
                 (
                     "created_at",
-                    models.DateTimeField(default=application.blog.models._now),
+                    models.DateTimeField(default=applications.blog.models._now),
                 ),
                 (
                     "author",

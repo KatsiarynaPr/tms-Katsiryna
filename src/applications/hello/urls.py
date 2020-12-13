@@ -1,7 +1,7 @@
 from django.urls import path
 
-from application.hello import views
-from application.hello.views import HelloView
+from applications.hello import views
+from applications.hello.views import HelloView
 
 urlpatterns = [
     path("", HelloView.as_view()),
