@@ -1,31 +1,34 @@
+from typing import Dict
+
 from django import forms
-from django.http import HttpRequest
-from django.http import HttpResponse
-from django.shortcuts import redirect
-from django.shortcuts import render
 from django.views.generic import FormView
+from django.views.generic import RedirectView
+
+from framework.mixins import ExtendedContextMixin
 
 
 class HelloForm(forms.Form):
-    name = forms.CharField()
-    address = forms.CharField()
+    name = forms.CharField(required=False)
+    address = forms.CharField(required=False)
 
 
-class HelloView(FormView):
-    template_name = "hello/hello.html"
-    success_url = "/h/"
+class HelloView(ExtendedContextMixin, FormView):
     form_class = HelloForm
+    success_url = "/h/"
+    template_name = "hello/hello.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
+    def get_initial(self):
+        return self.get_extended_context()
+
+    def get_extended_context(self) -> Dict:
         name = self.request.session.get("name")
         address = self.request.session.get("address")
-        context.update(
-            {
-                "name": name or "anonymous",
-                "address": address or "nowhere",
-            }
-        )
+
+        context = {
+            "address": address,
+            "name": name,
+        }
+
         return context
 
     def form_valid(self, form):
@@ -33,34 +36,10 @@ class HelloView(FormView):
         address = form.cleaned_data["address"]
         self.request.session["name"] = name
         self.request.session["address"] = address
-
         return super().form_valid(form)
 
 
-# def hello(request: HttpRequest) -> HttpResponse:
-#    name = request.session.get("name")
-#   address = request.session.get("address")
-#  context = {
-#     "name_header": name or "anonymous",
-#    "name_value": name or "",
-#   "address_header": address or "nowhere",
-#  "address_value": address or "",
-# }
-# result = render(request, "hello/hello.html", context=context)
-
-# return HttpResponse(result)
-
-
-# def view_hello_greet(request: HttpRequest) -> HttpResponse:
-# name = request.POST.get("name")
-# address = request.POST.get("address")
-
-# request.session["name"] = name
-# request.session["address"] = address
-
-# return redirect("/h/")
-
-
-def view_hello_reset(request: HttpRequest) -> HttpResponse:
-    request.session.clear()
-    return redirect("/h/")
+class HelloResetView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        self.request.session.clear()
+        return "/h/"

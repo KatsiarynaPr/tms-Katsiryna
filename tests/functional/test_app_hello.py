@@ -22,7 +22,7 @@ def test(browser, request):
     validate_redirect(page, url)
     assert page.greeting.text == "Hello Alex"
     assert page.address.text == "You are in nowhere"
-    #assert page.name_input.get_attribute("value") == "Alex"
+    # assert page.name_input.get_attribute("value") == "Alex"
 
     page.name_input.clear()
     page.address_input.clear()
@@ -31,7 +31,7 @@ def test(browser, request):
     validate_redirect(page, url)
     assert page.greeting.text == "Hello anonymous"
     assert page.address.text == "You are in localhost"
-    #assert page.address_input.get_attribute("value") == "localhost"
+    assert page.address_input.get_attribute("value") == "localhost"
 
     page.name_input.clear()
     page.address_input.clear()
@@ -41,5 +41,5 @@ def test(browser, request):
     validate_redirect(page, url)
     assert page.greeting.text == "Hello Alex"
     assert page.address.text == "You are in localhost"
-    #assert page.name_input.get_attribute("value") == "Alex"
-    #assert page.address_input.get_attribute("value") == "localhost"
+    assert page.name_input.get_attribute("value") == "Alex"
+    assert page.address_input.get_attribute("value") == "localhost"

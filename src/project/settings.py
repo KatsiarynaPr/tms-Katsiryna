@@ -14,9 +14,8 @@ import os
 from pathlib import Path
 
 import dj_database_url
-from dynaconf import settings as dyn
-
 from django.urls import reverse_lazy
+from dynaconf import settings as dyn
 
 DEBUG = dyn.MODE_DEBUG
 
