@@ -1,5 +1,7 @@
 {% extends "_base.html" %}
+{% load static %}
 {% block main %}
+ <script src="{% static 'blog/scripts/blog.js' %}"></script>
 {{ob}}
 <h1>Singl posts</h1>
 
@@ -7,7 +9,9 @@
   <h2>{{ post.title }}</h2>
   <p>{{ post.content }}</p>
   <p>{{ post.created_at }}</p>
-  <p>Likes: {{ post.nr_likes }}</p>
+  <span class="likes" onclick="like(this, {{ post.pk }});">{{ post.nr_likes }}</span>
+  <p> {{ post.author.username }} </p>
+  <p> {{ post.author.email }} </p>
 </article>
 </form>
 <p>
