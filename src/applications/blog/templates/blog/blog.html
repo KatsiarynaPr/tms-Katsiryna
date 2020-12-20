@@ -2,8 +2,9 @@
 {% load static %}
 
 {% block main %}
+{% if not user.is_anonymous %}
 <script src="{% static 'blog/scripts/blog.js' %}"></script>
-
+{% endif %}
 {{ob}}
 <h1>All posts</h1>
 
@@ -36,9 +37,7 @@
   <h2>{{ post.title }}</h2>
   <p>{{ post.content }}</p>
   <p>{{ post.created_at }}</p>
-  {% if not user.is_anonymous %}
-    <span class="likes" onclick="like(this, {{ post.pk }});">{{ post.nr_likes }}</span>
-  {% endif %}
+  <span class="likes liked" onclick="like(this, {{ post.pk }});">{{ post.nr_likes }}</span>
   <p> {{ post.author.username }} </p>
   <p> {{ post.author.email }} </p>
   <p>
