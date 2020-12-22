@@ -9,7 +9,7 @@
   <h2>{{ post.title }}</h2>
   <p>{{ post.content }}</p>
   <p>{{ post.created_at }}</p>
-  <span class="likes" onclick="like(this, {{ post.pk }});">{{ post.nr_likes }}</span>
+  <span class="likes liked" onclick="like(this, {{ post.pk }});">{{ post.nr_likes }}</span>
   <p> {{ post.author.username }} </p>
   <p> {{ post.author.email }} </p>
 </article>

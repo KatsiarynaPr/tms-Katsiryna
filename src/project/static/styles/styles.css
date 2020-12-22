@@ -210,14 +210,11 @@ main {
   user-select: none;
 }
 
-.likes::before {
+.not-liked::before {
   content: "💛\00a0";
 }
 
-.likes:active {
-  color: red;
-}
 
-.likes:active::before {
+.liked::before {
   content: "❤️\00a0";
 }
