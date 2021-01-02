@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block main %}
+ <script src="{% static 'blog/scripts/blog.js' %}"></script>
+{{ob}}
+<h1>Singl posts</h1>
+
+<article>
+  <h2>{{ post.title }}</h2>
+  <p>{{ post.content }}</p>
+  <p>{{ post.created_at }}</p>
+  <span class="likes liked" onclick="like(this, {{ post.pk }});">{{ post.nr_likes }}</span>
+  <p> {{ post.author.username }} </p>
+  <p> {{ post.author.email }} </p>
+</article>
+</form>
+<p>
+{% if user.is_superuser or object.author == user %}
+<form action="delete/" method="post">
+    {% csrf_token %}
+  <button id="wipe_id" type="submit">Reset Singl Post</button>
+</form>
+{% endif %}
+</form>
+<p>
+<form action="update/" method="get">
+    {% csrf_token %}
+  <button id="update_id" type="submit">Update Post</button>
+</form>
+
+{% endblock %}

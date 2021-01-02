@@ -14,13 +14,15 @@ pytest-mock = "*"
 pytest-selenium = "*"
 delorean = "*"
 
+
 [packages]
 dynaconf = { extras = ["yaml"], version = "*" }
 gunicorn = "*"
-#psycopg2-binary = "*"
+psycopg2-binary = "*"
 django = "*"
 sentry-sdk = "*"
 whitenoise = "*"
+dj-database-url = "*"
 
 [requires]
 python_version = "3.9"

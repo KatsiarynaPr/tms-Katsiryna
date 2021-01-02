@@ -1,0 +1,12 @@
+{% extends "_base.html" %}
+{% block main %}
+{{ob}}
+<h1>UPDATE IF YOU WONT</h1>
+
+{% if user.is_superuser or object.author == user %}
+<form action="" method="post">{% csrf_token %}
+      {{ form.as_p }}
+    <input type="submit" value="Update" />
+</form>
+{% endif %}
+{% endblock %}

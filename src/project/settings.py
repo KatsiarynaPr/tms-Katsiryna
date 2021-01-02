@@ -10,9 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
-from dynaconf import settings as _ds
+import dj_database_url
+from django.urls import reverse_lazy
+from dynaconf import settings as dyn
+
+DEBUG = dyn.MODE_DEBUG
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 _this_file = Path(__file__).resolve()
@@ -23,14 +28,14 @@ DIR_SRC = DIR_PROJECT.parent.resolve()
 
 DIR_REPO = DIR_SRC.parent.resolve()
 
-SECRET_KEY = _ds.SECRET_KEY
+SECRET_KEY = dyn.SECRET_KEY
 
-DEBUG = _ds.MODE_DEBUG
+DEBUG = dyn.MODE_DEBUG
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    _ds.HOST,
+    dyn.HOST,
 ]
 
 
@@ -44,8 +49,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # ------------------------------
-    "application.landing.apps.LandingConfig",
-    "application.hello.apps.HelloConfig",
+    "applications.landing.apps.LandingConfig",
+    "applications.hello.apps.HelloConfig",
+    "applications.blog.apps.BlogConfig",
+    "applications.onboarding.apps.OnboardingConfig",
 ]
 
 MIDDLEWARE = [
@@ -53,7 +60,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    # "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -83,12 +90,9 @@ WSGI_APPLICATION = "project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": DIR_SRC / "db.sqlite3",
-    }
-}
+DATABASE_URL = os.getenv("DATABASE_URL", dyn.DATABASE_URL)
+
+DATABASES = {"default": dj_database_url.parse(DATABASE_URL)}
 
 
 # Password validation
@@ -109,6 +113,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+if DEBUG:
+    AUTH_PASSWORD_VALIDATORS = []
+
+LOGIN_URL = reverse_lazy("onboarding:sign-in")
+LOGIN_REDIRECT_URL = reverse_lazy("landing:index")
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

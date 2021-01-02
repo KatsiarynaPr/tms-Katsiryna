@@ -1,0 +1,53 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block main %}
+{% if not user.is_anonymous %}
+<script src="{% static 'blog/scripts/blog.js' %}"></script>
+{% endif %}
+
+{{ob}}
+<h1>All posts</h1>
+
+{% if not user.is_anonymous %}
+<form method="post" action="/b/new/">
+    {% csrf_token %}
+    <p>
+      <label for="id_title">Title</label>
+      <input id="id_title" type="text" name="title">
+    </p>
+    <p>
+      <label for="id_content">Content</label>
+      <textarea id="id_title" name="content"></textarea>
+    </p>
+    <button type="submit">Create Post</button>
+  </form>
+{% endif %}
+
+{% if user.is_superuser %}
+<p>
+<form action="/b/wipe/" method="post">
+    {% csrf_token %}
+  <button id="wipe_id" type="submit">Reset Post</button>
+</form>
+</p>
+{% endif %}
+
+{% for post in object_list %}
+<article>
+  <h2>{{ post.title }}</h2>
+  <p>{{ post.content }}</p>
+  <p>{{ post.created_at }}</p>
+  <span class="likes liked" onclick="like(this, {{ post.pk }});">{{ post.nr_likes }}</span>
+  <p> {{ post.author.username }} </p>
+  <p> {{ post.author.email }} </p>
+  <p>
+  <form action="post/{{ post.pk }}/" method="get">
+    {% csrf_token %}
+  <button id="post_id" type="submit">Read Post</button>
+  </p>
+  </form>
+</article>
+{% endfor %}
+
+{% endblock %}
