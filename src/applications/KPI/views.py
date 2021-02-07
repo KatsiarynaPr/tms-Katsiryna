@@ -1,6 +1,6 @@
 from typing import Dict
 from django_filters.rest_framework import DjangoFilterBackend
-from service
+
 
 import xlwt
 from django import forms
@@ -9,22 +9,40 @@ from django.views.generic import CreateView
 from django.views.generic import ListView
 
 from applications.KPI.models import KPI
+from applications.KPI.service import KPIFilter
 
 
 class AllKPIView(ListView):
     template_name = "KPI/KPI.html"
     model = KPI
     filter_backend = (DjangoFilterBackend,)
+    filterset_class = KPIFilter
 
     def get_extended_context(self) -> Dict:
         context = {"form": KPIForm()}
         return context
 
+class NewKPIView(ListView):
+    template_name = "KPI/NewKPI.html"
+    model = KPI
+
+
+class SaveNewKPIView(ListView):
+    template_name = "KPI/NewKPI.html"
+    model = KPI
+    fields = ["month", "year", "employee", "position", "final_coefficient", "plan_сoefficient", "quality_сoefficient"]
+    success_url = "/KPI/"
+
+    def form_valid(self, form):
+        KPI = form.save(commit=False)
+        KPI.user = self.request.user
+
+        return super().form_valid(form)
 
 class KPIForm(forms.ModelForm):
     class Meta:
         model = KPI
-        fields = ["employee"]
+        fields = ["month", "year", "employee", "position", "final_coefficient", "plan_сoefficient", "quality_сoefficient"]
         widgets = {"employee": forms.Textarea(attrs={"rows": 2})}
 
 

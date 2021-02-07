@@ -42,8 +42,8 @@
         </select>
         <!--        года через JS-->
         <select name="year" id="year"></select>
-        <button id="add"> Сохранить</button>
-        <button id="unload"><a href="{% url 'KPI:export_users_xls' %}"</a><i class="fas fa-file-upload"></i> Выгрузить</button>
+        <button id="add"><a href="new/"> Заполнить</button>
+        <button id="unload"><a href="export/xls/"> Выгрузить</button>
     </div>
     <!--    Таблица-->
     <table class="table1 table">
@@ -59,30 +59,32 @@
         </tr>
         <!--    Строка таблицы!!!-->
         {% for KPI in object_list %}
-        <tr>
-            <td class="fio">{{ KPI.employee }}</td>
-            <td class="position">{{ KPI.position }}</td>
-            <td class="kpi">
-                <div class="tdRow">
-                    <div>{{ KPI.final_coefficient }}%</div>
-                    <div><a href="final/{{ KPI.pk }}"><i class="far fa-list-alt"></i></a></div>
-                </div>
-            </td>
-            <td class="kpi">
-                <div class="tdRow">
-                    <div>{{ KPI.plan_сoefficient }}%</div>
-                    <div><a href="plan/{{ KPI.pk }}"><i class="far fa-list-alt"></i></a></div>
-                </div>
-            </td>
-            <td class="kpi">
-                <div class="tdRow">
-                    <div>{{ KPI.quality_сoefficient }}%</div>
-                    <div><a href="quality/{{ KPI.pk }}/"><i class="far fa-list-alt"></i></a></div>
-                </div>
-            </td>
-            <td class="change"><i class="fas fa-edit"></i></td>
-            <td class="change"><i class="fas fa-trash-alt"></i></td>
-        </tr>
+        {% if KPI.year == 2021 %}
+            {% if KPI.month == 'Январь' %}
+            <tr>
+                <td class="fio">{{ KPI.employee }}</td>
+                <td class="position">{{ KPI.position }}</td>
+                <td class="kpi">
+                    <div class="tdRow">
+                        <div>{{ KPI.final_coefficient }}%</div>
+                        <div><a href="final/{{ KPI.pk }}">-></div>
+                    </div>
+                </td>
+                    <td class="kpi">
+                    <div class="tdRow">
+                        <div>{{ KPI.plan_сoefficient }}%</div>
+                        <div><a href="plan/{{ KPI.pk }}">-></div>
+                    </div>
+                </td>
+                <td class="kpi">
+                    <div class="tdRow">
+                        <div>{{ KPI.quality_сoefficient }}%</div>
+                        <div><a href="quality/{{ KPI.pk }}/">-></div>
+                    </div>
+                </td>
+            </tr>
+            {% endif %}
+        {% endif %}
         {% endfor %}
     </table>
     <div><img src="/s/images/komikaki.jpg" alt="komikaki"></div>
@@ -102,6 +104,8 @@
     }
 
 </script>
+<script src="applications/KPI/static/KPI/scripts/scripts.js' %}"></script>
+<script src="http://twitter.github.com/hogan.js/builds/3.0.1/hogan-3.0.1.js"></script>
 </body>
 </html>
 

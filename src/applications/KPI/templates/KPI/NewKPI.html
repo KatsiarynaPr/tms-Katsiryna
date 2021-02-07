@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KPI-Сводная информация</title>
+    <link rel="stylesheet" href="/s/styles/css.css">
+    <link href="/s/styles/all.css" rel="stylesheet">
+</head>
+<body>
+<!--Header-->
+<header>
+    <div><img src="/s/images/logo_mtbankslogan.png" alt="MTBank"></div>
+    <div class="user">
+        <div>{{ user.username }}</div>
+        <button onclick="window.location.href='http://127.0.0.1:8000/o/sign-in/';">Вход</button>
+        <button onclick="window.location.href='http://127.0.0.1:8000/o/sign-out/';">Выход</button>
+    </div>
+</header>
+<!--Main Field-->
+<div class="mainField">
+    <div class="bigText">Сводная информация</div>
+<form method="post" action="/KPI/new/save/">
+    <!--    Списки-->
+    <div class="middleText flex"><p>Период:</p>
+        <!--        месяцы-->
+        <input id="id_month" type="text" name="month">
+        <!--        года -->
+        <input id="id_year" type="number" name="year">
+
+        <button type="submit">Сохранить</button>
+    </div>
+    <!--    Таблица-->
+    <table class="table1 table">
+        <!--    Шапка таблицы-->
+        <tr>
+            <th>ФИО сотрудника</th>
+            <th>Должность</th>
+            <th>Итоговый коэффициент</th>
+            <th>План</th>
+            <th>Оценка качества</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <!--    Строка таблицы!!!-->
+        <tr>
+                <td class="fio">
+                    <div><input name="employee" type="text"> </div>
+                </td>
+                <td class="position">
+                    <div><input name="position" type="text"> </div>
+                </td>
+                <td class="kpi">
+                    <div class="tdRow">
+                        <div><input name="final_coefficient" type="text"> %</div>
+                    </div>
+                </td>
+                    <td class="kpi">
+                    <div class="tdRow">
+                        <div><input name="plan_сoefficient" type="text"> %</div>
+                    </div>
+                </td>
+                <td class="kpi">
+                    <div class="tdRow">
+                        <div>{{ KPI.quality_сoefficient }}%</div>
+                        <div><input name="quality_сoefficient" type="text"> %</div>
+                    </div>
+                </td>
+            </tr>
+</form>
+    </table>
+    <div><img src="/s/images/komikaki.jpg" alt="komikaki"></div>
+</div>
+<!--Footer-->
+<footer>
+    <div>&copy; made Kate with </i></div>
+</footer>
+</body>
+</html>
