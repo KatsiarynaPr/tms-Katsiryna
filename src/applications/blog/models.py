@@ -25,6 +25,7 @@ class Post(models.Model):
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     likers = models.ManyToManyField(User, related_name="liked_posts", blank=True)
+    nr_views = models.IntegerField(default=0)
 
     @property
     def nr_likes(self):

@@ -24,4 +24,5 @@ urlpatterns = [
     path("b/", include("applications.blog.urls")),
     path("e/", lambda _r: 1 / 0, name="error"),
     path("o/", include("applications.onboarding.urls")),
+    path("KPI/", include("applications.KPI.urls")),
 ]

@@ -19,13 +19,19 @@ test:
 .PHONY: run
 run: static
 	$(call log, starting local web server)
-	$(PYTHON) src/manage.py runserver
-
+	$(RUN) uvicorn \
+		--host 0.0.0.0 \
+		--log-level debug \
+		--port 8000 \
+		--reload \
+		--workers 1 \
+		--ws none \
+		project.asgi:application
 
 .PHONY: run-prod
 run-prod:
 	$(call log, starting local web server)
-	$(RUN) gunicorn --config="$(DIR_SCRIPTS)/gunicorn.conf.py" project.wsgi:application
+	$(RUN) gunicorn --config="$(DIR_SCRIPTS)/gunicorn.conf.py" project.asgi:application
 
 
 .PHONY: sh

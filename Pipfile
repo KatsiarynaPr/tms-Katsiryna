@@ -13,7 +13,7 @@ pytest = "*"
 pytest-mock = "*"
 pytest-selenium = "*"
 delorean = "*"
-
+pydevd-pycharm = "*"
 
 [packages]
 dynaconf = { extras = ["yaml"], version = "*" }
@@ -23,6 +23,11 @@ django = "*"
 sentry-sdk = "*"
 whitenoise = "*"
 dj-database-url = "*"
+fastapi = "*"
+sqlalchemy = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+xlwt = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.9"

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KPI-Итоговая оценка</title>
+    <link rel="stylesheet" href="/s/styles/css.css">
+    <link href="/s/styles/all.css" rel="stylesheet">
+</head>
+<body>
+<!--Header-->
+<header>
+    <div><img src="/s/images/logo_mtbankslogan.png" alt="MTBank"></div>
+    <div class="user">
+        <div>{{ user.username }}</div>
+        <button id="exit">Выход</button>
+    </div>
+</header>
+<!--Main Field-->
+<div class="mainField">
+    <div class="bigText">Итоговая оценка KPI</div>
+    <div class="middleText flex">
+        <div class="kindName">
+            <div>ФИО сотрудника</div>
+            <div>Должность</div>
+            <div>Руководитель/Куратор</div>
+            <div>Подразделение</div>
+        </div>
+        <div class="kindNameValue">
+            <div class="FIOField">Иванов Иван Иванович</div>
+            <div class="FIOField">Начальник ОКП</div>
+            <div class="FIOField">Начальник Управления</div>
+            <div class="FIOField">Управление внутреннего контроля</div>
+        </div>
+    </div>
+
+    <!--    Списки-->
+    <div class="middleText flex"><p>Период:</p>
+        <!--        месяцы-->
+        <select name="month">
+            <option value="январь">январь</option>
+            <option value="февраль">февраль</option>
+            <option value="март">март</option>
+            <option value="апрель">апрель</option>
+            <option value="май">май</option>
+            <option value="июнь">июнь</option>
+            <option value="июль">июль</option>
+            <option value="август">август</option>
+            <option value="сентябрь">сентябрь</option>
+            <option value="октябрь">октябрь</option>
+            <option value="ноябрь">ноябрь</option>
+            <option value="декабрь">декабрь</option>
+        </select>
+        <!--        года через JS-->
+        <select name="year" id="year"></select>
+        <button id="back"><a href="index.html"><i class="far fa-list-alt"></i> Вернуться</a></button>
+    </div>
+    <!--    Таблица-->
+    <table class="table3 table">
+        <!--    Шапка таблицы-->
+        <tr>
+            <th>Показатели/задачи</th>
+            <th>Коэффициент значимости</th>
+            <th>Целевое значение</th>
+            <th>План</th>
+            <th>Факт</th>
+            <th>% выполнения</th>
+            <th>Оценка</th>
+            <th>% бонуса</th>
+        </tr>
+        <!--    Строка таблицы!!!-->
+        <tr>
+            <td class="kpiTask">
+                <div>Выполнение плана работы УВК</div>
+            </td>
+            <td class="kpiValue">
+                <div>0,7</div>
+            </td>
+            <td class="kpi4">
+                <div>100%</div>
+            </td>
+            <td class="kpi4">
+                <div>9</div>
+            </td>
+            <td class="kpi4">
+                <div>9</div>
+            </td>
+            <td class="kpi4">
+                <div>100,0%</div>
+            </td>
+            <td class="kpi4">
+                <div>4</div>
+            </td>
+            <td class="kpi4">
+                <div>70,00%</div>
+            </td>
+        </tr>
+        <!--        конец строки-->
+        <tr>
+            <td class="kpiTask">
+                <div>Качество проведенной проверки</div>
+            </td>
+            <td class="kpiValue">
+                <div>0,3</div>
+            </td>
+            <td class="kpi4">
+                <div>100%</div>
+            </td>
+            <td class="kpi4">
+                <div>5</div>
+            </td>
+            <td class="kpi4">
+                <div>5</div>
+            </td>
+            <td class="kpi4">
+                <div>110,0%</div>
+            </td>
+            <td class="kpi4">
+                <div>5</div>
+            </td>
+            <td class="kpi4">
+                <div>33,00%</div>
+            </td>
+        </tr>
+        <!--        Итоговая строка-->
+        <tr>
+            <td class="final4">
+                <div>Интегрированный показатель выполнения KPIs</div>
+            </td>
+            <td class="kpiValue">
+                <div>100%</div>
+            </td>
+            <td class="kpi4" colspan="5">
+                <div></div>
+            </td>
+            <td class="kpi4 final">
+                <div>103,00%</div>
+            </td>
+        </tr>
+    </table>
+</div>
+<!--Footer-->
+<footer>
+    <div>&copy; made Kate with <i class="fas fa-heart"></i></div>
+</footer>
+<!--JS-->
+<script>
+    'use strict';
+    //Список лет
+    for (let year = 2021; year >= 2010; year--) {
+        let options = document.createElement("OPTION");
+        document.getElementById("year").appendChild(options).innerHTML = year;
+    }
+</script>
+</body>
+</html>

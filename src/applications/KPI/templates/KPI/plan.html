@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KPI-Выполнение</title>
+    <link rel="stylesheet" href="/s/styles/css.css">
+    <link href="/s/styles/all.css" rel="stylesheet">
+</head>
+<body>
+<!--Header-->
+<header>
+    <div><img src="/s/images/logo_mtbankslogan.png" alt="MTBank"></div>
+    <div class="user">
+        <div>{{ user.username }}</div>
+        <button id="exit">Выход</button>
+    </div>
+</header>
+<!--Main Field-->
+<div class="mainField">
+    <div class="bigText">Выполнение плановых показателей</div>
+    <div class="middleText flex"><p>ФИО сотрудника</p>
+        <div class="FIOField">{{ KPI.employee }}</div>
+    </div>
+    <!--    Списки-->
+    <div class="middleText flex"><p>Период:</p>
+        <!--        месяцы-->
+        <select name="month">
+            <option value="январь">январь</option>
+            <option value="февраль">февраль</option>
+            <option value="март">март</option>
+            <option value="апрель">апрель</option>
+            <option value="май">май</option>
+            <option value="июнь">июнь</option>
+            <option value="июль">июль</option>
+            <option value="август">август</option>
+            <option value="сентябрь">сентябрь</option>
+            <option value="октябрь">октябрь</option>
+            <option value="ноябрь">ноябрь</option>
+            <option value="декабрь">декабрь</option>
+        </select>
+        <!--        года через JS-->
+        <select name="year" id="year"></select>
+        <button id="add"><i class="fas fa-file-download"></i> Загрузить</button>
+        <button id="unload"><i class="fas fa-save"></i> Сохранить</button>
+        <button id="back"><a href="index.html"><i class="far fa-list-alt"></i> Вернуться</a></button>
+    </div>
+    <!--    Таблица-->
+    <table class="table2 table">
+        <!--    Шапка таблицы-->
+        <tr>
+            <th>Задача</th>
+            <th>Плановый <br> срок</th>
+            <th>Фактический <br> срок</th>
+            <th>Вид задачи</th>
+            <th>Выполнено досрочно</th>
+            <th>Стоимость задачи</th>
+            <th>Просрочка</th>
+            <th>Ненадлежащее качество</th>
+            <th>Итого</th>
+            <th>Комментарий</th>
+        </tr>
+        <!--    Строка таблицы!!!-->
+        <tr>
+            <td class="task">Мониторинг качества выполнения рекомендаций</td>
+            <td class="kpi2">
+                <div>01.02.2021</div>
+            </td>
+            <td class="kpi2">
+                <div>28.01.2021</div>
+            </td>
+            <td class="kpi">
+                <select name="typeTask">
+                    <option value="качественная">качественная</option>
+                    <option value="плановая">плановая</option>
+                </select>
+            </td>
+            <td class="kpi">
+                <div>
+                    <input type="checkbox"></div>
+            </td>
+            <td class="kpi">
+                <select name="valueTask">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                </select>
+            </td>
+            <td class="kpi">
+                <div>
+                    <input type="checkbox"></div>
+            </td>
+            <td class="kpi">
+                <div>
+                    <input type="checkbox"></div>
+            </td>
+            <td class="kpi final">
+                <div>1.0</div>
+            </td>
+            <td class="kpi adTask">
+                <div><textarea name="comment" rows="2"></textarea></div>
+            </td>
+        </tr>
+        <!--        конец строки-->
+        <tr>
+            <td class="task">Актуализация МРиК</td>
+            <td class="kpi2">
+                <div>01.02.2021</div>
+            </td>
+            <td class="kpi2">
+                <div>28.01.2021</div>
+            </td>
+            <td class="kpi">
+                <select name="typeTask">
+                    <option value="качественная">качественная</option>
+                    <option value="плановая">плановая</option>
+                </select>
+            </td>
+            <td class="kpi">
+                <div>
+                    <input type="checkbox"></div>
+            </td>
+            <td class="kpi">
+                <select name="valueTask">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                </select>
+            </td>
+            <td class="kpi">
+                <div>
+                    <input type="checkbox"></div>
+            </td>
+            <td class="kpi">
+                <div>
+                    <input type="checkbox"></div>
+            </td>
+            <td class="kpi final">
+                <div>1.0</div>
+            </td>
+            <td class="kpi adTask">
+                <div><textarea name="comment" rows="2"></textarea></div>
+            </td>
+        </tr>
+        <!--        Итоговая строка-->
+        <tr>
+            <td class="task"></td>
+            <td class="kpi2">
+                <div></div>
+            </td>
+            <td class="kpi2">
+                <div></div>
+            </td>
+            <td class="kpi">
+                <div></div>
+            </td>
+            <td class="kpi">
+                <div></div>
+            </td>
+            <td class="kpi">
+                <div></div>
+            </td>
+            <td class="kpi">
+                <div></div>
+            </td>
+            <td class="kpi final1">
+                <div>ИТОГО</div>
+            </td>
+            <td class="kpi final">
+                <div>2.0</div>
+            </td>
+            <td class="kpi adTask">
+                <div></div>
+            </td>
+        </tr>
+    </table>
+</div>
+<!--Footer-->
+<footer>
+    <div>&copy; made Kate with <i class="fas fa-heart"></i></div>
+</footer>
+<!--JS-->
+<script>
+    'use strict';
+    //Список лет
+    for (let year = 2021; year >= 2010; year--) {
+        let options = document.createElement("OPTION");
+        document.getElementById("year").appendChild(options).innerHTML = year;
+    }
+</script>
+</body>
+</html>

@@ -38,6 +38,7 @@
   <p>{{ post.content }}</p>
   <p>{{ post.created_at }}</p>
   <span class="likes liked" onclick="like(this, {{ post.pk }});">{{ post.nr_likes }}</span>
+    <p> Просмотры: {{ post.nr_views }}</p>
   <p> {{ post.author.username }} </p>
   <p> {{ post.author.email }} </p>
   <p>

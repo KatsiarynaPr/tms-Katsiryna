@@ -36,7 +36,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     dyn.HOST,
-]
+] + list(dyn.ALLOWED_HOSTS or [])
 
 
 # Application definition
@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     "applications.hello.apps.HelloConfig",
     "applications.blog.apps.BlogConfig",
     "applications.onboarding.apps.OnboardingConfig",
+    "applications.KPI.apps.KPIConfig",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -64,6 +66,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "applications.blog.middleware.counter.CounterMiddleware",
 ]
 
 ROOT_URLCONF = "project.urls"
@@ -146,3 +149,9 @@ STATICFILES_DIRS = [
 
 if not DEBUG:
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ),
+}

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KPI-Оценка</title>
+    <link rel="stylesheet" href="/s/styles/css.css">
+    <link href="/s/styles/all.css" rel="stylesheet">
+</head>
+<body>
+<!--Header-->
+<header>
+    <div><img src="/s/images/logo_mtbankslogan.png" alt="MTBank"></div>
+    <div class="user">
+        <div>{{ user.username }}</div>
+        <button id="exit">Выход</button>
+    </div>
+</header>
+<!--Main Field-->
+<div class="mainField">
+    <div class="bigText">Качественная оценка показателей</div>
+    <div class="middleText flex"><p>ФИО сотрудника</p>
+        <div class="FIOField"> {{ KPI.employee }} </div>
+    </div>
+    <!--    Списки-->
+    <div class="middleText flex"><p>Период:</p>
+        <!--        месяцы-->
+        <select name="month">
+            <option value="январь">январь</option>
+            <option value="февраль">февраль</option>
+            <option value="март">март</option>
+            <option value="апрель">апрель</option>
+            <option value="май">май</option>
+            <option value="июнь">июнь</option>
+            <option value="июль">июль</option>
+            <option value="август">август</option>
+            <option value="сентябрь">сентябрь</option>
+            <option value="октябрь">октябрь</option>
+            <option value="ноябрь">ноябрь</option>
+            <option value="декабрь">декабрь</option>
+        </select>
+        <!--        года через JS-->
+        <select name="year" id="year"></select>
+        <button id="add"><i class="fas fa-file-download"></i> Загрузить</button>
+        <button id="back"><a href="{% url 'KPI:allKPI' %}"</a><i class="far fa-list-alt"></i> Вернуться</a></button>
+    </div>
+    <!--    Таблица-->
+    <table class="table3 table">
+        <!--    Шапка таблицы-->
+        <tr>
+            <th>№</th>
+            <th>Компетенция</th>
+            <th>Области оценки</th>
+            <th>Вес</th>
+            <th>Оценка</th>
+            <th>% выполнения</th>
+            <th>Комментарий</th>
+        </tr>
+        <!--    Строка таблицы!!!-->
+        <form method="post" action="new/">
+        <tr>
+            <td class="task3">
+                <div><input name="K1" type="text"> </div>
+            </td>
+            <td class="kpiTask">
+                <div>Профессиональная этика и навыки</div>
+            </td>
+            <td class="kpiTask">
+                <div>1. Этика.
+                     2.1. Стандарты работы.
+                     2.2. Управление, риски и контроль.
+                     2.3. Знания законодательства и ЛНПА.</div>
+            </td>
+            <td class="kpiValue">
+                <div>0,1</div>
+            </td>
+            <td class="kpiSelect">
+                <div class="tdRow">
+                    <select name="krit" class="selector">
+                        <option name="1">1</option>
+                        <option name="2">2</option>
+                        <option name="3">3</option>
+                        <option name="4">4</option>
+                        <option name="5">5</option>
+                    </select>
+                    <div class="kategory"></div>
+                </div>
+            </td>
+            <td class="kpi4">
+                <div><input name="part" type="text"> %</div>
+            </td>
+            <td class="kpi3 adTask">
+                <div><textarea name="comment" rows="2"></textarea></div>
+            </td>
+        </tr>
+        <!--        конец строки-->
+        <tr>
+            <td class="task3">
+                <div><input name="K2" type="text"> </div>
+            </td>
+            <td class="kpiTask">
+                <div>Профессиональные и личные качества.</div>
+            </td>
+            <td class="kpiTask">
+                <div>3.1. Коммуникации. 3.2. Лидерство и работа в команде. </div>
+            </td>
+            <td class="kpiValue">
+                <div>0,2</div>
+            </td>
+            <td class="kpiSelect">
+                <div class="tdRow">
+                    <select name="krit" class="selector">
+                        <option name="1">1</option>
+                        <option name="2">2</option>
+                        <option name="3">3</option>
+                        <option name="4">4</option>
+                        <option name="5">5</option>
+                    </select>
+                    <div class="kategory"></div>
+                </div>
+            </td>
+            <td class="kpi4">
+                <div><input name="part" type="text"> %</div>
+            </td>
+            <td class="kpi3 adTask">
+                <div><textarea name="comment" rows="2"></textarea></div>
+            </td>
+        </tr>
+        <!--        конец строки-->
+        <tr>
+            <td class="task3">
+                <div><input name="K3" type="text"> </div>
+            </td>
+            <td class="kpiTask">
+                <div>Исполнение функций внутреннего контроля.</div>
+            </td>
+            <td class="kpiTask">
+                <div>4.1. Бизнес процессы и проектное управление.
+                     4.2. Сбор информации и анализ.
+                     4.3. Развитие комплаенс-функций. </div>
+            </td>
+            <td class="kpiValue">
+                <div>0,5</div>
+            </td>
+            <td class="kpiSelect">
+                <div class="tdRow">
+                    <select name="krit" class="selector">
+                        <option name="1">1</option>
+                        <option name="2">2</option>
+                        <option name="3">3</option>
+                        <option name="4">4</option>
+                        <option name="5">5</option>
+                    </select>
+                    <div class="kategory"></div>
+                </div>
+            </td>
+            <td class="kpi4">
+                <div><input name="part" type="text"> %</div>
+            </td>
+            <td class="kpi3 adTask">
+                <div><textarea name="comment" rows="2"></textarea></div>
+            </td>
+        </tr>
+        <!--        конец строки-->
+        <tr>
+            <td class="task3">
+                <div><input name="K4" type="text"> </div>
+            </td>
+            <td class="kpiTask">
+                <div>Улучшения и инновации</div>
+            </td>
+            <td class="kpiTask">
+                <div>5.1. Управление изменениями. </div>
+            </td>
+            <td class="kpiValue">
+                <div>0,2</div>
+            </td>
+            <td class="kpiSelect">
+                <div class="tdRow">
+                    <select name="krit" class="selector">
+                        <option name="1">1</option>
+                        <option name="2">2</option>
+                        <option name="3">3</option>
+                        <option name="4">4</option>
+                        <option name="5">5</option>
+                    </select>
+                    <div class="kategory"></div>
+                </div>
+            </td>
+            <td class="kpi4">
+                <div><input name="part" type="text"> %</div>
+            </td>
+            <td class="kpi3 adTask">
+                <div><textarea name="comment" rows="2"></textarea></div>
+            </td>
+        </tr>
+
+         <button type="submit"> Сохранить</button>
+        </form>
+        <!--        Итоговая строка-->
+        <tr>
+            <td class="task3"></td>
+            <td class="kpiTask">
+                <div></div>
+            </td>
+            <td class="kpiTask">
+                <div></div>
+            </td>
+            <td class="kpiValue">
+                <div></div>
+            </td>
+            <td class="kpiSelect">
+                <div class="tdRow marks">
+                    <div class="final1">Итоговая оценка</div>
+                    <div id="finalMark" class="final">5</div>
+                </div>
+            </td>
+            <td class="kpi4">
+                <div class="final">102.0 %</div>
+            </td>
+            <td class="kpi3 adTask">
+                <div></div>
+            </td>
+        </tr>
+    </table>
+</div>
+<!--Footer-->
+<footer>
+    <div>&copy; made Kate with <i class="fas fa-heart"></i></div>
+</footer>
+<!--JS-->
+<script>
+    'use strict';
+    //Список лет
+    for (let year = 2021; year >= 2010; year--) {
+        let options = document.createElement("OPTION");
+        document.getElementById("year").appendChild(options).innerHTML = year;
+    }
+    //    Оценки
+    let objKritery = {
+        1: 'Неудовлетворительно',
+        2: 'Не соответствует ожиданиям',
+        3: 'Удовлетворительно',
+        4: 'Соответствует ожиданиям',
+        5: 'Превосходит ожидания',
+    }
+    let select = document.getElementsByClassName('selector');
+    let divNameKrit = document.getElementsByClassName('kategory');
+    for (let i = 0; i < select.length; i++) {
+        select[i].value = 5;
+        divNameKrit[i].innerHTML = 'Превосходит ожидания';
+        select[i].onchange = () => {
+            divNameKrit[i].innerHTML = `${objKritery[select[i].value]}`;
+        }
+    }
+</script>
+</body>
+</html>

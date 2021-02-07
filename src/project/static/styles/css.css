@@ -1,0 +1,336 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgba(32, 106, 170, 0.1);
+    color: #206AAA;
+}
+
+/*Header*/
+header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid rgba(205, 92, 92, 0.5) 4px;
+    font-size: 20px;
+    background-color: white;
+    position: fixed;
+}
+
+header div {
+    margin: auto
+}
+
+.user {
+    border-left: solid rgba(205, 92, 92, 0.5) 2px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px
+}
+
+.user > div {
+    margin: auto;
+
+}
+
+button, input[type='submit'] {
+    border: solid #206AAA 1px;
+    border-radius: 5px;
+    padding: 5px 20px;
+    background-color: white;
+    margin-left: 10px;
+    color: #206AAA;
+    font-size: 20px;
+    outline: none
+}
+
+button:hover, input[type='submit']:hover {
+    cursor: pointer;
+    background-color: rgba(32, 106, 170, 0.1);
+}
+
+button:active, input[type='submit']:active {
+    color: rgba(205, 92, 92, 0.5)
+}
+
+/*Main part of page*/
+.mainField {
+    margin: 0 15%;
+    padding-top: 84px;
+    width: 70%;
+    min-height: 630px;
+    background-color: white;
+    padding-bottom: 30px;
+}
+
+.bigText {
+    font-size: 50px;
+    padding: 20px
+}
+
+.middleText {
+    font-size: 20px;
+    padding: 20px;
+}
+
+.middleText p {
+    padding: 0;
+    margin: 0;
+    vertical-align: center;
+    line-height: 35px;
+}
+
+select {
+    font-size: 20px;
+    color: rgb(205, 92, 92);
+    border-radius: 2px;
+    border: solid #206AAA 1px;
+    outline: none;
+    margin: 0 5px
+
+}
+
+a {
+    text-decoration: none;
+    padding-left: 10px
+}
+
+a:visited {
+    color: #206AAA;
+}
+
+a i {
+    color: indianred;
+}
+
+i:active, a:active {
+    color: rgba(205, 92, 92, 0.5)
+}
+
+i:hover {
+    cursor: pointer;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 30px;
+    width: 100%;
+    background-color: #206AAA;
+    color: white;
+    font-size: 10px
+}
+
+/*Footer*/
+footer div {
+    margin: 10px 5px
+}
+
+.FIOField {
+    border: solid 1px #206AAA;
+    margin-left: 10px;
+    min-width: 500px;
+    padding: 5px
+}
+
+.flex {
+    display: flex
+}
+
+/*Table*/
+.table {
+    margin: 0 20px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.table tr {
+    border: solid rgba(32, 106, 170, 0.2) 1px;
+    height: 50px
+}
+
+/*Table1*/
+.table1 {
+    font-size: 20px;
+}
+
+.table1 .fio {
+    padding-left: 5px;
+    text-align: left;
+    width: 30%;
+}
+
+.table1 .kpi {
+    width: 20%;
+    padding-left: 10px;
+}
+
+.tdRow {
+    display: flex;
+    justify-content: center;
+}
+
+.change {
+    font-size: 16px;
+    width: 40px
+}
+
+/*Table2*/
+.table2 {
+    font-size: 15px;
+}
+
+.table2 .task {
+    padding-left: 5px;
+    text-align: left;
+    width: 70px
+}
+
+.kpi2 {
+    width: 100px
+}
+
+.table2 select {
+    font-size: 15px;
+    color: #206AAA;
+}
+
+.adTask div {
+    padding: 0 10px;
+    line-height: 35px;
+}
+
+textarea {
+    border-color: #206AAA;
+    color: #206AAA;
+    outline: none;
+}
+
+.final {
+    font-size: 20px;
+    color: indianred;
+    font-weight: bold;
+}
+
+.final1 {
+    font-size: 20px;
+    color: #206AAA;
+    font-weight: bold;
+}
+
+/*Table 3*/
+.task3 {
+    width: 30px
+}
+
+.kpiTask {
+    width: 20%
+}
+
+.kpiSelect {
+    width: 25%;
+    text-align: center;
+}
+
+.kategory {
+    width: 100%;
+    text-align: left;
+    line-height: 30px;
+    vertical-align: center;
+}
+
+.table3 input {
+    width: 30px;
+    line-height: 15px;
+    vertical-align: center;
+    color: #206AAA;
+    outline: none;
+    border-color: #206AAA;
+}
+
+.table3 textarea {
+    width: 80%;
+    margin-top: 10px
+}
+
+.kpiValue {
+    width: 50px
+}
+
+.kpi4 {
+    width: 60px
+}
+
+.marks div:last-child {
+    padding: 0 10px;
+}
+
+.marks {
+    justify-content: left;
+}
+
+/*Итоговый KPI*/
+.kindName div {
+    line-height: 35px;
+    vertical-align: center;
+    margin: 10px
+}
+
+.kindNameValue div {
+    margin: 10px 0;
+    color: indianred;
+}
+
+.final4 {
+    font-weight: bold;
+    font-size: 16px
+}
+
+/*Вход в систему*/
+.marg {
+    text-align: center;
+}
+
+form {
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 70%
+}
+
+form label {
+    margin: 10px
+}
+
+form input[type='text'] {
+    text-align: left;
+    width: 70%;
+    border-color: #206AAA;
+    border-radius: 10px;
+    font-size: 25px;
+    padding: 5px;
+    outline: none;
+    color: #206AAA;
+}
+
+form label:first-child input {
+    margin-left: 10px
+}
+
+form label:last-child {
+    text-align: center;
+}
+
+.mainFieldLogo {
+    background-color: white;
+    margin: 0 25%;
+    padding: 100px 0 50px 0;
+    border-radius: 10px;
+}
+
+.red {
+    border-color: indianred;
+}
+

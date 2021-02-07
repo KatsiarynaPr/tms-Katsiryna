@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KPI-Сводная информация</title>
+    <link rel="stylesheet" href="/s/styles/css.css">
+    <link href="/s/styles/all.css" rel="stylesheet">
+</head>
+<body>
+<!--Header-->
+<header>
+    <div><img src="/s/images/logo_mtbankslogan.png" alt="MTBank"></div>
+    <div class="user">
+        <div>{{ user.username }}</div>
+        <button onclick="window.location.href='http://127.0.0.1:8000/o/sign-in/';">Вход</button>
+        <button onclick="window.location.href='http://127.0.0.1:8000/o/sign-out/';">Выход</button>
+    </div>
+</header>
+<!--Main Field-->
+{% if user.is_anonymous %}
+<div class="mainField">
+    <div class="bigText">Доступ анонимным пользователям не предоставляется, просим зайти в систему</div>
+{% else %}
+<div class="mainField">
+    <div class="bigText">Сводная информация</div>
+    <!--    Списки-->
+    <div class="middleText flex"><p>Период:</p>
+        <!--        месяцы-->
+        <select name="month">
+            <option value="Январь">январь</option>
+            <option value="Февраль">февраль</option>
+            <option value="Март">март</option>
+            <option value="Апрель">апрель</option>
+            <option value="Май">май</option>
+            <option value="Июнь">июнь</option>
+            <option value="Июль">июль</option>
+            <option value="Август">август</option>
+            <option value="Сентябрь">сентябрь</option>
+            <option value="Октябрь">октябрь</option>
+            <option value="Ноябрь">ноябрь</option>
+            <option value="Декабрь">декабрь</option>
+        </select>
+        <!--        года через JS-->
+        <select name="year" id="year"></select>
+        <button id="add"> Сохранить</button>
+        <button id="unload"><a href="{% url 'KPI:export_users_xls' %}"</a><i class="fas fa-file-upload"></i> Выгрузить</button>
+    </div>
+    <!--    Таблица-->
+    <table class="table1 table">
+        <!--    Шапка таблицы-->
+        <tr>
+            <th>ФИО сотрудника</th>
+            <th>Должность</th>
+            <th>Итоговый коэффициент</th>
+            <th>План</th>
+            <th>Оценка качества</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <!--    Строка таблицы!!!-->
+        {% for KPI in object_list %}
+        <tr>
+            <td class="fio">{{ KPI.employee }}</td>
+            <td class="position">{{ KPI.position }}</td>
+            <td class="kpi">
+                <div class="tdRow">
+                    <div>{{ KPI.final_coefficient }}%</div>
+                    <div><a href="final/{{ KPI.pk }}"><i class="far fa-list-alt"></i></a></div>
+                </div>
+            </td>
+            <td class="kpi">
+                <div class="tdRow">
+                    <div>{{ KPI.plan_сoefficient }}%</div>
+                    <div><a href="plan/{{ KPI.pk }}"><i class="far fa-list-alt"></i></a></div>
+                </div>
+            </td>
+            <td class="kpi">
+                <div class="tdRow">
+                    <div>{{ KPI.quality_сoefficient }}%</div>
+                    <div><a href="quality/{{ KPI.pk }}/"><i class="far fa-list-alt"></i></a></div>
+                </div>
+            </td>
+            <td class="change"><i class="fas fa-edit"></i></td>
+            <td class="change"><i class="fas fa-trash-alt"></i></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div><img src="/s/images/komikaki.jpg" alt="komikaki"></div>
+</div>
+{% endif %}
+<!--Footer-->
+<footer>
+    <div>&copy; made Kate with <i class="fas fa-heart"></i></div>
+</footer>
+<!--JS-->
+<script>
+    'use strict';
+    //Список лет
+    for (let year = 2019; year <= 2030; year++) {
+        let options = document.createElement("OPTION");
+        document.getElementById("year").appendChild(options).innerHTML = year;
+    }
+
+</script>
+</body>
+</html>
+
