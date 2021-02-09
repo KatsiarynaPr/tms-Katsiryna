@@ -20,12 +20,14 @@
 <div class="mainField">
     <div class="bigText">Сводная информация</div>
 <form method="post" action="/KPI/new/save/">
+    {% csrf_token %}
+    {{ form }}
     <!--    Списки-->
     <div class="middleText flex"><p>Период:</p>
         <!--        месяцы-->
-        <input id="id_month" type="text" name="month">
+        <input id="id_month" type="text" placeholder="Месяц" name="month">
         <!--        года -->
-        <input id="id_year" type="number" name="year">
+        <input id="id_year" type="number" placeholder="Год" name="year">
 
         <button type="submit">Сохранить</button>
     </div>

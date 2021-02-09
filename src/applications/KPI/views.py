@@ -1,5 +1,6 @@
 from typing import Dict
 from django_filters.rest_framework import DjangoFilterBackend
+from django.shortcuts import render
 
 
 import xlwt
@@ -10,6 +11,42 @@ from django.views.generic import ListView
 
 from applications.KPI.models import KPI
 from applications.KPI.service import KPIFilter
+
+
+class KPIForm(forms.ModelForm):
+    class Meta:
+        model = KPI
+        fields = ["month", "year", "employee", "position", "final_coefficient", "plan_сoefficient", "quality_сoefficient"]
+        widgets = {
+            "month": forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder' : 'Введите месяц'
+            }),
+            "year": forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите год'
+            }),
+            "employee": forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите ФИО'
+            }),
+            "position": forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите должность'
+            }),
+            "final_coefficient": forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите %'
+            }),
+            "plan_сoefficient": forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите %'
+            }),
+            "quality_сoefficient": forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите %'
+            }),
+        }
 
 
 class AllKPIView(ListView):
@@ -25,6 +62,21 @@ class AllKPIView(ListView):
 class NewKPIView(ListView):
     template_name = "KPI/NewKPI.html"
     model = KPI
+    def create (reqvest):
+        error = ''
+        if reqvest.method == 'POST':
+            form = KPIForm(reqvest.POST)
+            if form.is_valid():
+                form.save()
+            else:
+                error = 'Данные введены неверно'
+
+        form = KPIForm()
+        data = {
+            'form': form,
+            'error': error
+        }
+        return render (reqvest, "KPI/NewKPI.html", data)
 
 
 class SaveNewKPIView(ListView):
@@ -39,11 +91,6 @@ class SaveNewKPIView(ListView):
 
         return super().form_valid(form)
 
-class KPIForm(forms.ModelForm):
-    class Meta:
-        model = KPI
-        fields = ["month", "year", "employee", "position", "final_coefficient", "plan_сoefficient", "quality_сoefficient"]
-        widgets = {"employee": forms.Textarea(attrs={"rows": 2})}
 
 
 class QualityKPIView(ListView):
