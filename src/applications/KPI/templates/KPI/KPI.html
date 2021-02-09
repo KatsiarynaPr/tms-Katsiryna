@@ -59,8 +59,7 @@
         </tr>
         <!--    Строка таблицы!!!-->
         {% for KPI in object_list %}
-        {% if KPI.year == 2021 %}
-            {% if KPI.month == 'Январь' %}
+
             <tr>
                 <td class="fio">{{ KPI.employee }}</td>
                 <td class="position">{{ KPI.position }}</td>

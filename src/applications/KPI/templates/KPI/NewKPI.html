@@ -19,9 +19,8 @@
 <!--Main Field-->
 <div class="mainField">
     <div class="bigText">Сводная информация</div>
-<form method="post" action="/KPI/new/save/">
+<form method="post" action="/KPI/new/">
     {% csrf_token %}
-    {{ form }}
     <!--    Списки-->
     <div class="middleText flex"><p>Период:</p>
         <!--        месяцы-->

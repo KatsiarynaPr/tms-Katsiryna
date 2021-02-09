@@ -59,24 +59,33 @@ class AllKPIView(ListView):
         context = {"form": KPIForm()}
         return context
 
-class NewKPIView(ListView):
+class NewKPIView(CreateView):
     template_name = "KPI/NewKPI.html"
     model = KPI
-    def create (reqvest):
-        error = ''
-        if reqvest.method == 'POST':
-            form = KPIForm(reqvest.POST)
-            if form.is_valid():
-                form.save()
-            else:
-                error = 'Данные введены неверно'
+    fields = ["month", "year", "employee", "position", "final_coefficient", "plan_сoefficient", "quality_сoefficient"]
+    success_url = "/KPI/"
 
-        form = KPIForm()
-        data = {
-            'form': form,
-            'error': error
-        }
-        return render (reqvest, "KPI/NewKPI.html", data)
+    def form_valid(self, form):
+        KPI = form.save(commit=False)
+        KPI.user = self.request.user
+
+        return super().form_valid(form)
+
+    #def create(reqvest):
+        #error = ''
+        #if reqvest.method == 'POST':
+            #form = KPIForm(reqvest.POST)
+            #if form.is_valid():
+                #form.save()
+            #else:
+                #error = 'Данные введены неверно'
+
+        #form = KPIForm()
+        #data = {
+            #'form': form,
+            #'error': error
+        #}
+        #return render (reqvest, "KPI/NewKPI.html", data)
 
 
 class SaveNewKPIView(ListView):
