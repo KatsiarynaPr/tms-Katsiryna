@@ -62,11 +62,12 @@ class AllKPIView(ListView):
 class NewKPIView(CreateView):
     template_name = "KPI/NewKPI.html"
     model = KPI
-    fields = ["month", "year", "employee", "position", "final_coefficient", "plan_сoefficient", "quality_сoefficient"]
+    fields = ["month", "year", "employee", "position", "plan_сoefficient", "quality_сoefficient"]
     success_url = "/KPI/"
 
     def form_valid(self, form):
         KPI = form.save(commit=False)
+        KPI.final_coefficient = KPI.plan_сoefficient*0.7 + KPI.quality_сoefficient*0.3
         KPI.user = self.request.user
 
         return super().form_valid(form)
