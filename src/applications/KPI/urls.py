@@ -15,7 +15,9 @@ urlpatterns = [
     path("new/", views.NewKPIView.as_view(), name="NewKPI"),
     path("new/save/", views.SaveNewKPIView.as_view(), name="SaveNewKPI"),
     path("quality/<int:pk>/", views.QualityKPIView.as_view(), name="qualityKPI"),
-    path("quality/<int:pk>/new/", views.NewQualityKPIView.as_view(), name="newqualityKPI"),
+    path(
+        "quality/<int:pk>/new/", views.NewQualityKPIView.as_view(), name="newqualityKPI"
+    ),
     path("plan/<int:pk>/", views.PlanKPIView.as_view(), name="planKPI"),
     path("final/<int:pk>/", views.FinalKPIView.as_view(), name="finalKPI"),
     path("export/xls/", views.export_users_xls, name="export_users_xls"),

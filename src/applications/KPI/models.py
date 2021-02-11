@@ -1,4 +1,5 @@
 import delorean
+import django_filters
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator
 from django.core.validators import MinValueValidator
@@ -47,7 +48,7 @@ class KPI(models.Model):
         help_text="Use the following format: <YYYY>",
     )
     month = models.TextField(null=True, blank=True)
-    #month = models.IntegerField(choices=month_list, default=1)
+    # month = models.IntegerField(choices=month_list, default=1)
 
     def get_absolute_url(self):
         return reverse("KPI", args=[str(self.id)])

@@ -1,13 +1,12 @@
 from typing import Dict
-from django_filters.rest_framework import DjangoFilterBackend
-from django.shortcuts import render
-
 
 import xlwt
 from django import forms
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.views.generic import CreateView
 from django.views.generic import ListView
+from django_filters.rest_framework import DjangoFilterBackend
 
 from applications.KPI.models import KPI
 from applications.KPI.service import KPIFilter
@@ -16,83 +15,111 @@ from applications.KPI.service import KPIFilter
 class KPIForm(forms.ModelForm):
     class Meta:
         model = KPI
-        fields = ["month", "year", "employee", "position", "final_coefficient", "plan_сoefficient", "quality_сoefficient"]
+        fields = [
+            "month",
+            "year",
+            "employee",
+            "position",
+            "final_coefficient",
+            "plan_сoefficient",
+            "quality_сoefficient",
+        ]
         widgets = {
-            "month": forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder' : 'Введите месяц'
-            }),
-            "year": forms.NumberInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите год'
-            }),
-            "employee": forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите ФИО'
-            }),
-            "position": forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите должность'
-            }),
-            "final_coefficient": forms.NumberInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите %'
-            }),
-            "plan_сoefficient": forms.NumberInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите %'
-            }),
-            "quality_сoefficient": forms.NumberInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите %'
-            }),
+            "month": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Введите месяц"}
+            ),
+            "year": forms.NumberInput(
+                attrs={"class": "form-control", "placeholder": "Введите год"}
+            ),
+            "employee": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Введите ФИО"}
+            ),
+            "position": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Введите должность"}
+            ),
+            "final_coefficient": forms.NumberInput(
+                attrs={"class": "form-control", "placeholder": "Введите %"}
+            ),
+            "plan_сoefficient": forms.NumberInput(
+                attrs={"class": "form-control", "placeholder": "Введите %"}
+            ),
+            "quality_сoefficient": forms.NumberInput(
+                attrs={"class": "form-control", "placeholder": "Введите %"}
+            ),
         }
 
 
 class AllKPIView(ListView):
     template_name = "KPI/KPI.html"
     model = KPI
-    filter_backend = (DjangoFilterBackend,)
-    filterset_class = KPIFilter
+
+    def get_queryset(self):
+        month = self.request.GET.get("month")
+        return super(AllKPIView, self).get_queryset().filter(month=month)
+
+        # if self.request.GET.get("year"):
+        # year = self.request.GET.get("year")
+        # filter_set = filter_set.filter(year=year)
+
+        # context["month"] = filter_set
+        # context["year"] = filter_set
 
     def get_extended_context(self) -> Dict:
         context = {"form": KPIForm()}
         return context
 
+
 class NewKPIView(CreateView):
     template_name = "KPI/NewKPI.html"
     model = KPI
-    fields = ["month", "year", "employee", "position", "plan_сoefficient", "quality_сoefficient"]
+    fields = [
+        "month",
+        "year",
+        "employee",
+        "position",
+        "plan_сoefficient",
+        "quality_сoefficient",
+    ]
     success_url = "/KPI/"
 
     def form_valid(self, form):
         KPI = form.save(commit=False)
-        KPI.final_coefficient = KPI.plan_сoefficient*0.7 + KPI.quality_сoefficient*0.3
+        KPI.final_coefficient = (
+            KPI.plan_сoefficient * 0.7 + KPI.quality_сoefficient * 0.3
+        )
         KPI.user = self.request.user
 
         return super().form_valid(form)
 
-    #def create(reqvest):
-        #error = ''
-        #if reqvest.method == 'POST':
-            #form = KPIForm(reqvest.POST)
-            #if form.is_valid():
-                #form.save()
-            #else:
-                #error = 'Данные введены неверно'
+    # def create(reqvest):
+    # error = ''
+    # if reqvest.method == 'POST':
+    # form = KPIForm(reqvest.POST)
+    # if form.is_valid():
+    # form.save()
+    # else:
+    # error = 'Данные введены неверно'
 
-        #form = KPIForm()
-        #data = {
-            #'form': form,
-            #'error': error
-        #}
-        #return render (reqvest, "KPI/NewKPI.html", data)
+    # form = KPIForm()
+    # data = {
+    #'form': form,
+    #'error': error
+    # }
+    # return render (reqvest, "KPI/NewKPI.html", data)
 
 
 class SaveNewKPIView(ListView):
     template_name = "KPI/NewKPI.html"
     model = KPI
-    fields = ["month", "year", "employee", "position", "final_coefficient", "plan_сoefficient", "quality_сoefficient"]
+    fields = [
+        "month",
+        "year",
+        "employee",
+        "position",
+        "final_coefficient",
+        "plan_сoefficient",
+        "quality_сoefficient",
+    ]
     success_url = "/KPI/"
 
     def form_valid(self, form):
@@ -100,7 +127,6 @@ class SaveNewKPIView(ListView):
         KPI.user = self.request.user
 
         return super().form_valid(form)
-
 
 
 class QualityKPIView(ListView):
