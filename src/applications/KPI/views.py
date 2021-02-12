@@ -184,6 +184,8 @@ def export_users_xls(_request):
     columns = [
         "Сотрудник",
         "Должность",
+        "Месяц",
+        "Год",
         "Итоговый коэффициент",
         "План",
         "Оценка",
@@ -198,6 +200,8 @@ def export_users_xls(_request):
     rows = KPI.objects.all().values_list(
         "employee",
         "position",
+        "month",
+        "year",
         "final_coefficient",
         "plan_сoefficient",
         "quality_сoefficient",
